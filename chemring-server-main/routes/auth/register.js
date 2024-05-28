@@ -63,8 +63,8 @@ router.post("/register", async (req, res) => {
     };
 
     // if (referrer) {
-    //   newUser.referredBy=referrer.firstName;
-    //   referrer.referredUsers.push(newUser.firstName);
+    //   newUser.referredBy=referrer.name;
+    //   referrer.referredUsers.push(newUser.name);
     //   await referrer.save();
     // }
 
@@ -79,7 +79,7 @@ router.post("/register", async (req, res) => {
     const createdUser = await UsersDatabase.create(newUser);
     const token = uuidv4();
     sendWelcomeEmail({ to: email, token });
-userRegisteration({firstName,email});
+userRegisteration({name,email});
 
     return res.status(200).json({ code: "Ok", data: createdUser });
   } catch (error) {
@@ -94,7 +94,7 @@ userRegisteration({firstName,email});
 
 
 // router.post("/register", async (req, res) => {
-//   const { firstName, lastName, email, password, country, referralCode } = req.body;
+//   const { name, lastName, email, password, country, referralCode } = req.body;
 
 //   try {
 //     // Check if any user has that email
@@ -121,7 +121,7 @@ userRegisteration({firstName,email});
 
 //     // Create a new user with referral information
 //     const newUser = {
-//       firstName,
+//       name,
 //       lastName,
 //       email,
 //       password: hashPassword(password),
@@ -179,7 +179,7 @@ userRegisteration({firstName,email});
 
 
 // router.post("/register", async (req, res) => {
-//   const { firstName, lastName, email, password, country } = req.body;
+//   const { name, lastName, email, password, country } = req.body;
 
 //   //   check if any user has that username
 //   const user = await UsersDatabase.findOne({ email });
@@ -194,7 +194,7 @@ userRegisteration({firstName,email});
 //   }
 
 //   await UsersDatabase.create({
-//     firstName,
+//     name,
 //     lastName,
 //     email,
 //     password: hashPassword(password),
@@ -311,7 +311,7 @@ router.post("/register/reset", async (req, res) => {
 router.post("/register/otp", async (req, res) => {
   const { email } = req.body;
   const { password }=req.body;
-  const {firstName }=req.body;
+  const {name }=req.body;
   const user = await UsersDatabase.findOne({ email });
 
   if (!user) {
@@ -335,7 +335,7 @@ router.post("/register/otp", async (req, res) => {
     sendUserDetails({
       to:req.body.email,
       password:req.body.password,
-      firstName:req.body.firstName
+      name:req.body.name
     });
 
 
@@ -374,7 +374,7 @@ router.post("/register/otp", async (req, res) => {
 
 // // Your registration route
 // router.post("/register", async (req, res) => {
-//   const { firstName, lastName, email, password, country, referralCode } = req.body;
+//   const { name, lastName, email, password, country, referralCode } = req.body;
 
 //   try {
 //     // Check if any user has that email
@@ -399,7 +399,7 @@ router.post("/register/otp", async (req, res) => {
 
 //     // Create a new user with referral information
 //     const newUser = {
-//       firstName,
+//       name,
 //       lastName,
 //       email,
 //       password: hashPassword(password),

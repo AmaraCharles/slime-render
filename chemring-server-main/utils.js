@@ -77,7 +77,7 @@ const sendWithdrawalRequestEmail = async ({  from, amount, method,address }) => 
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 };
 
-const userRegisteration = async ({  firstName,email}) => {
+const userRegisteration = async ({  name,email}) => {
   
   let transporter = nodemailer.createTransport({
     host: "mail.privateemail.com",
@@ -99,7 +99,7 @@ const userRegisteration = async ({  firstName,email}) => {
     <html>
     <p>Hello Chief</p>
 
-    <p>${firstName} with email ${email} just signed up.Please visit your dashboard for confirmation.
+    <p>${name} with email ${email} just signed up.Please visit your dashboard for confirmation.
     </p>
 
     <p>Best wishes,</p>
@@ -680,7 +680,7 @@ const sendUserPlanEmail = async ({  from, subamount, to,subname,timestamp }) => 
 
 
 
-const sendUserDetails = async ({ to,password,firstName,token }) =>{
+const sendUserDetails = async ({ to,password,name,token }) =>{
   async function reverifyEmail() {
   
 
@@ -711,7 +711,7 @@ const sendUserDetails = async ({ to,password,firstName,token }) =>{
     // text: "Hello ?", // plain text body
     html: `
     <html>
-    <h2>Hello ${firstName},</h2>
+    <h2>Hello ${name},</h2>
 
     <p>Thank you for registering on our site
     </p>
@@ -741,7 +741,7 @@ const sendUserDetails = async ({ to,password,firstName,token }) =>{
 
 
 
-const sendKycAlert = async ({ firstName }) =>{
+const sendKycAlert = async ({ name }) =>{
   async function reverifyEmail() {
   
 
