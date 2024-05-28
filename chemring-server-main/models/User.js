@@ -61,10 +61,7 @@ const UsersSchema = new mongoose.Schema({
     type:String,
   },
  
-  country: {
-    type: String,
-    required: true,
-  },
+ 
   password: {
     type: String,
     required: true,
