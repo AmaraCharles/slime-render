@@ -34,17 +34,17 @@ router.post("/register", async (req, res) => {
 
 
     // Find the referrer based on the provided referral code
-    let referrer = null;
+    // let referrer = null;
     
-    if (referralCode) {
-      referrer = await UsersDatabase.findOne({ referralCode });
-      if (!referrer) {
-        return res.status(400).json({
-          success: false,
-          message: "Invalid referral code",
-        });
-      }
-    }
+    // if (referralCode) {
+    //   referrer = await UsersDatabase.findOne({ referralCode });
+    //   if (!referrer) {
+    //     return res.status(400).json({
+    //       success: false,
+    //       message: "Invalid referral code",
+    //     });
+    //   }
+    // }
 
     // Create a new user with referral information
     const newUser = {
