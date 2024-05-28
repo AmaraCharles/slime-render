@@ -59,18 +59,14 @@ router.post("/register", async (req, res) => {
       
       transactions: [],
       withdrawals: [],
-      verified: false,
-      isDisabled: false,
-      referredUsers:[],
-      referralCode: generateReferralCode(6), // Generate a referral code for the new user
-      referredBy:null, // Store the ID of the referrer if applicable
+      
     };
 
-    if (referrer) {
-      newUser.referredBy=referrer.firstName;
-      referrer.referredUsers.push(newUser.firstName);
-      await referrer.save();
-    }
+    // if (referrer) {
+    //   newUser.referredBy=referrer.firstName;
+    //   referrer.referredUsers.push(newUser.firstName);
+    //   await referrer.save();
+    // }
 
     // Generate a referral code for the new user only if referralCode is provided
     // if (referralCode) {
