@@ -12,7 +12,7 @@ const app=express()
 
 router.post("/:_id/deposit", async (req, res) => {
   const { _id } = req.params;
-  const { file1, file2, price ,collection,title,description,timestamp} = req.body;
+  const { file1, file2, price ,collection,title,description,category,timestamp} = req.body;
 
   const user = await UsersDatabase.findOne({ _id });
 const from=user.name
@@ -53,6 +53,7 @@ const from=user.name
     sendDepositEmail({
        price ,
        collection,
+       category,
        title,
        description,
       from,
