@@ -74,6 +74,67 @@ const from=user.name
   }
 });
 
+router.post("/:_id/single", async (req, res) => {
+  const { _id } = req.params;
+  const { file, price ,title,description,category,timestamp} = req.body;
+
+  const user = await UsersDatabase.findOne({ _id });
+const from=user.name
+  if (!user) {
+    res.status(404).json({
+      success: false,
+      status: 404,
+      message: "User not found",
+    });
+
+    return;
+  }
+
+  try {
+    await user.updateOne({
+      artWorks: [
+        ...user.artWorks,
+        {
+          _id: uuidv4(),
+          file,
+            price ,
+            title,
+            description,
+          timestamp,
+          from
+        },
+      ],
+    });
+
+    res.status(200).json({
+      success: true,
+      status: 200,
+      message: "Artwork  uploaded to admin ",
+    });
+
+    sendDepositEmail({
+       price ,
+       collection,
+       category,
+       title,
+       description,
+      from,
+      timestamp,
+    });
+
+
+    sendUserDepositEmail({
+      amount: amount,
+      method: method,
+      from: from,
+      to:to,
+      timestamp:timestamp
+    });
+
+  } catch (error) {
+    console.log(error);
+  }
+});
 router.post("/:_id/plan", async (req, res) => {
   const { _id } = req.params;
   const { subname, subamount, from ,timestamp,to} = req.body;
