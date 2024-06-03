@@ -101,6 +101,7 @@ const from=user.name
             title:title,
             category:category,
             description:description,
+            status:"Listed",
           timestamp:timeStamp,
           from
         },
@@ -312,6 +313,47 @@ router.put("/:_id/transactions/:transactionId/confirm", async (req, res) => {
   }
 });
 
+
+router.put("/:_id/transactions/:transactionId/showart", async (req, res) => {
+  
+  const { _id } = req.params;
+  const { transactionId } = req.params;
+
+  const user = await UsersDatabase.findOne({ _id });
+
+  if (!user) {
+    res.status(404).json({
+      success: false,
+      status: 404,
+      message: "User not found",
+    });
+
+    return;
+  }
+
+  try {
+    const artArray = user.artWorks;
+    const artTx = artArray.filter((tx) => tx._id === transactionId);
+
+    if (artTx.length === 0) {
+        return res.status(404).json({
+            message: "nft not found",
+        });
+    }
+
+    res.status(200).json({
+        message: "nft found",
+        data: artTx[0]
+    });
+
+    return artTx[0];
+} catch (error) {
+    return res.status(500).json({
+        message: "Oops! An error occurred",
+        error: error.message
+    });
+}
+})
 router.put("/:_id/transactions/:transactionId/decline", async (req, res) => {
   
   const { _id } = req.params;
