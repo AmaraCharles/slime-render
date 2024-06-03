@@ -96,12 +96,12 @@ const from=user.name
         ...user.artWorks,
         {
           _id: uuidv4(),
-          imgUrl,
-            price ,
-            title,
-            category,
-            description,
-          timestamp,
+          imgUrl:imgUrl,
+            price:price,
+            title:title,
+            category:category,
+            description:description,
+          timestamp:timestamp,
           from
         },
       ],
