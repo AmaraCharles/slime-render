@@ -23,6 +23,10 @@ const UsersSchema = new mongoose.Schema({
     type: Array,
     
   },
+  collections: {
+    type: Array,
+    
+  },
   trader: {
     type: String,
     
