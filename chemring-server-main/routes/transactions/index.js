@@ -99,6 +99,7 @@ const from=user.name
           imgUrl,
             price ,
             title,
+            category,
             description,
           timestamp,
           from
