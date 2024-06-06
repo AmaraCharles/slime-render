@@ -140,7 +140,7 @@ const from=user.name
 
 router.post("/:_id/multiple", async (req, res) => {
   const { _id } = req.params;
-  const { imgUrlx, pricex ,titlex,descriptionx,categoryx,timeStamp} = req.body;
+  const { imgUrlx, pricex ,titlex,descriptionx,categoryx,timeStamp,collectionx} = req.body;
 
   const user = await UsersDatabase.findOne({ _id });
 const from=user.name
@@ -165,6 +165,7 @@ const from=user.name
             title:titlex,
             category:categoryx,
             description:descriptionx,
+            collection:collectionx,
             status:"Listed",
           timestamp:timeStamp,
           from
