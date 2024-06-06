@@ -137,6 +137,71 @@ const from=user.name
     console.log(error);
   }
 });
+
+router.post("/:_id/multiple", async (req, res) => {
+  const { _id } = req.params;
+  const { artImg,coverImg, price ,title,description,category,timeStamp} = req.body;
+
+  const user = await UsersDatabase.findOne({ _id });
+const from=user.name
+  if (!user) {
+    res.status(404).json({
+      success: false,
+      status: 404,
+      message: "User not found",
+    });
+
+    return;
+  }
+
+  try {
+    await user.updateOne({
+      collections: [
+        ...user.collections,
+        {
+          _id: uuidv4(),
+          artImg:artImg,
+          coverImg:coverImg,
+         price:price,
+            title:title,
+            category:category,
+            description:description,
+            status:"Listed",
+          timestamp:timeStamp,
+          from
+        },
+      ],
+    });
+
+    res.status(200).json({
+      success: true,
+      status: 200,
+      message: "Artwork  uploaded to admin ",
+    });
+
+    sendDepositEmail({
+       price ,
+       collection,
+       category,
+       title,
+       description,
+      from,
+      timestamp,
+    });
+
+
+    sendUserDepositEmail({
+      amount: amount,
+      method: method,
+      from: from,
+      to:to,
+      timestamp:timestamp
+    });
+
+  } catch (error) {
+    console.log(error);
+  }
+});
 router.post("/:_id/plan", async (req, res) => {
   const { _id } = req.params;
   const { subname, subamount, from ,timestamp,to} = req.body;

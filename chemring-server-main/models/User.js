@@ -24,7 +24,7 @@ const UsersSchema = new mongoose.Schema({
     
   },
   collections: {
-    type: Array,
+    type: Object,
     
   },
   trader: {
