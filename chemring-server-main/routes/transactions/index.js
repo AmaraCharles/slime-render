@@ -140,7 +140,7 @@ const from=user.name
 
 router.post("/:_id/multiple", async (req, res) => {
   const { _id } = req.params;
-  const { imgUrlx,coverImg, price ,title,description,category,timeStamp} = req.body;
+  const { imgUrlx, pricex ,titlex,descriptionx,categoryx,timeStamp} = req.body;
 
   const user = await UsersDatabase.findOne({ _id });
 const from=user.name
@@ -161,8 +161,7 @@ const from=user.name
         {
           _id: uuidv4(),
           imgUrl:imgUrlx,
-          coverImg:coverImgx,
-         price:pricex,
+                  price:pricex,
             title:titlex,
             category:categoryx,
             description:descriptionx,
