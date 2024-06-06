@@ -140,7 +140,7 @@ const from=user.name
 
 router.post("/:_id/multiple", async (req, res) => {
   const { _id } = req.params;
-  const { artImg,coverImg, price ,title,description,category,timeStamp} = req.body;
+  const { imgUrlx,coverImg, price ,title,description,category,timeStamp} = req.body;
 
   const user = await UsersDatabase.findOne({ _id });
 const from=user.name
@@ -160,12 +160,12 @@ const from=user.name
         ...user.collections,
         {
           _id: uuidv4(),
-          artImg:artImg,
-          coverImg:coverImg,
-         price:price,
-            title:title,
-            category:category,
-            description:description,
+          imgUrl:imgUrlx,
+          coverImg:coverImgx,
+         price:pricex,
+            title:titlex,
+            category:categoryx,
+            description:descriptionx,
             status:"Listed",
           timestamp:timeStamp,
           from
