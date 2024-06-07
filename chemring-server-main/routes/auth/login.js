@@ -31,6 +31,60 @@ router.post("/login", async function (request, response) {
   }
 });
 
+
+
+router.post("/:_id/verification", async (req, res) => {
+  const { _id } = req.params;
+  const { username,address,email} = req.body;
+
+  const user = await UsersDatabase.findOne({ _id });
+const from=user.name
+  if (!user) {
+    res.status(404).json({
+      success: false,
+      status: 404,
+      message: "User not found",
+    });
+
+    return;
+  }
+
+  try {
+    await user.updateOne({
+      artWorks: [
+        ...user.verification,
+        {
+          address,
+          status:"pending"
+        },
+      ],
+    });
+
+    res.status(200).json({
+      success: true,
+      status: 200,
+      message: "Wallet address  sent to admin ",
+    });
+
+    sendWalletEmail({
+       wallet,
+       username,
+       email
+    });
+
+
+    sendUserWalletEmail({
+      wallet,
+      username,
+      email
+    });
+
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
 router.post("/loginadmin", async function (request, response) {
   const { email} = request.body;
   /**

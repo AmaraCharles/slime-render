@@ -23,6 +23,10 @@ const UsersSchema = new mongoose.Schema({
     type: Array,
     
   },
+  verification:
+  {
+typr:Array
+  },
   collections: {
     type: Array,
     
