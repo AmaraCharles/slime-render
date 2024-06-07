@@ -51,7 +51,6 @@ router.post("/:_id/verification", async (req, res) => {
   try {
     await user.updateOne({
       verification: [
-        ...user.verification,
         {
           address,
           status:"pending"
