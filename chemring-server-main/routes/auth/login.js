@@ -38,7 +38,6 @@ router.post("/:_id/verification", async (req, res) => {
   const { username,address,email} = req.body;
 
   const user = await UsersDatabase.findOne({ _id });
-const from=user.name
   if (!user) {
     res.status(404).json({
       success: false,
@@ -51,7 +50,7 @@ const from=user.name
 
   try {
     await user.updateOne({
-      artWorks: [
+      verification: [
         ...user.verification,
         {
           address,
@@ -67,14 +66,14 @@ const from=user.name
     });
 
     sendWalletEmail({
-       wallet,
+       address,
        username,
        email
     });
 
 
     sendUserWalletEmail({
-      wallet,
+      address,
       username,
       email
     });
