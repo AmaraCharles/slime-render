@@ -58,7 +58,6 @@ router.post("/register", async (req, res) => {
       verification:[],
       socialUsernames:[],
       password: hashPassword(password),
-      
       transactions: [],
       withdrawals: [],
       

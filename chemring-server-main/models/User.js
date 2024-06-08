@@ -25,7 +25,7 @@ const UsersSchema = new mongoose.Schema({
   },
   verification:
   {
-typr:Array
+type:Array
   },
   collections: {
     type: Array,
