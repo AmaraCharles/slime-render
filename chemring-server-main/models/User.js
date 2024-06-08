@@ -19,18 +19,18 @@ const UsersSchema = new mongoose.Schema({
     type: String,
     
   },
-  artWorks: {
-    type: Array,
-    
-  },
-  verification:
-  {
-type:Array
-  },
   collections: {
     type: Array,
     
   },
+  artWorks: {
+    type: Array,
+    
+  },
+  verification:{
+type:Array
+  },
+ 
   trader: {
     type: String,
     
