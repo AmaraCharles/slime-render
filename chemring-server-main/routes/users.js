@@ -39,26 +39,40 @@ router.delete("/:email/delete", async function (req, res, next) {
 
 router.put("/:_id/profile/update", async function (req, res, next) {
   const { _id } = req.params;
-
-  const user = await UsersDatabase.findOne({ _id: _id });
-
-  if (!user) {
-    res.status(404).json({ message: "user not found" });
-    return;
-  }
+  const { name, email, balance, condition } = req.body;
 
   try {
-    await user.update({
-      ...req.body,
-    });
+    const user = await User.findOne({ _id: _id });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Update user details
+    user.name = name || user.name;
+    user.email = email || user.email;
+    user.balance = balance || user.balance;
+
+    // Update the condition in verification[0].status
+    if (user.verification) {
+      user.verification[0].status = condition;
+    } else {
+      return res.status(400).json({ message: "Verification data not found" });
+    }
+
+    // Save the updated user
+    await user.save();
 
     return res.status(200).json({
-      message: "update was successful",
+      message: "Update was successful",
+      user
     });
   } catch (error) {
-    console.log(error);
+    console.error('Error updating user profile:', error);
+    return res.status(500).json({ message: "An error occurred while updating the profile", error });
   }
 });
+
 
 router.put("/:_id/accounts/update", async function (req, res, next) {
   const { _id } = req.params;
