@@ -23,8 +23,8 @@ router.get("/:email", async function (req, res, next) {
   res.status(200).json({ code: "Ok", data: user });
 });
 
-router.get("art/parsedData", async function (req, res, next) {
-  const { _id, transactionId } = req.body;
+router.get("/art/:id/:transactionId", async function (req, res, next) {
+  const { _id, transactionId } = req.params;
 
   try {
     const user = await UsersDatabase.findOne({ _id: _id });
