@@ -42,7 +42,7 @@ router.get("/art/:_id/:transactionId", async function (req, res, next) {
       }
     }
     
-    return res.status(200).json({ code: "Ok", data: item });
+    return res.status(200).json({ code: "Ok", data: item.data });
   } catch (error) {
     console.error('Error:', error);
     return res.status(500).json({ message: "An error occurred", error });
