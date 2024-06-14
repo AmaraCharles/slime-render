@@ -61,7 +61,7 @@ router.put("/:_id/profile/update", async function (req, res, next) {
     }
 
     // Perform the update using updateOne with $set
-    await User.updateOne(
+    await user.updateOne(
       { _id },
       { $set: updateFields }
     );
