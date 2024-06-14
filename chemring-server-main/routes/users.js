@@ -24,10 +24,10 @@ router.get("/:email", async function (req, res, next) {
 });
 
 router.get("/art/parsedData", async function (req, res, next) {
-  const { id, transactionId } = req.body;
+  const { _id, transactionId } = req.body;
 
   try {
-    const user = await UsersDatabase.findOne({ _id: id });
+    const user = await UsersDatabase.findOne({ _id: _id });
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
