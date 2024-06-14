@@ -103,7 +103,8 @@ const from=user.name
             description:description,
             status:"Listed",
           timestamp:timeStamp,
-          from
+          from,
+          views:"",
         },
       ],
     });
@@ -168,6 +169,7 @@ const from=user.name
             collection:collectionx,
             status:"Listed",
           timestamp:timeStamp,
+          views:"",
           from
         },
       ],
