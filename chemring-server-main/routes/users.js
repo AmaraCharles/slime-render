@@ -24,28 +24,31 @@ router.get("/:email", async function (req, res, next) {
 });
 
 router.get("/art/parsedData", async function (req, res, next) {
-  const {parsedData}= req.body;
+  const { id, transactionId } = req.body;
 
   try {
-    const user = await UsersDatabase.findOne({ _id: parsedData[0] });
+    const user = await UsersDatabase.findOne({ _id: id });
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const collection = user.collections.find(col => col._id=== parsedData[1]);
+    let item = user.collections.find(col => col._id=== transactionId);
 
-    if (!collection) {
-      return res.status(404).json({ message: "Collection not found" });
+    if (!item) {
+      item = user.artWorks.find(art => art._id === transactionId);
+      if (!item) {
+        return res.status(404).json({ message: "Collection or Artwork not found" });
+      }
     }
-
-    return res.status(200).json({ code: "Ok", data: collection });
+    
+    return res.status(200).json({ code: "Ok", data: item });
   } catch (error) {
     console.error('Error:', error);
     return res.status(500).json({ message: "An error occurred", error });
   }
 });
-
+    
 router.delete("/:email/delete", async function (req, res, next) {
   const { email } = req.params;
 
