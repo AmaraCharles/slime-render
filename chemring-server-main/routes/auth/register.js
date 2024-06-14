@@ -52,7 +52,7 @@ router.post("/register", async (req, res) => {
       username,
       email,
       phoneNumber,
-      artWorks:[],
+      artWorks:[{views:""}],
       collections:[{views:""}],
       balance:0,
       verification:[],
