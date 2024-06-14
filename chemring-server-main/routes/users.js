@@ -23,7 +23,7 @@ router.get("/:email", async function (req, res, next) {
   res.status(200).json({ code: "Ok", data: user });
 });
 
-router.get("/parsedData", async function (req, res, next) {
+router.get("/art/parsedData", async function (req, res, next) {
   const {parsedData}= req.body;
 
   try {
