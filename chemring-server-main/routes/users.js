@@ -42,7 +42,7 @@ router.put("/:_id/profile/update", async function (req, res, next) {
   const { name, email, balance, condition } = req.body;
 
   try {
-    const user = await user.findOne({ _id: _id });
+    const user = await  UsersDatabase.findOne({ _id: _id });
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
