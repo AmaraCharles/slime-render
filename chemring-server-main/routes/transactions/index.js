@@ -357,6 +357,13 @@ router.put("/:_id/transactions/:transactionId/confirm", async (req, res) => {
         break;
       }
     }
+    await user.updateOne({
+      collections: [
+        ...user.collections
+        //cummulativeWithdrawalTx
+      ],
+    });
+
 
     // Update the transaction status in artWorks
     const artsArray = user.artWorks;
@@ -367,7 +374,12 @@ router.put("/:_id/transactions/:transactionId/confirm", async (req, res) => {
         break;
       }
     }
-
+ await user.updateOne({
+      artWorks: [
+        ...user.artWorks
+        //cummulativeWithdrawalTx
+      ],
+    });
     if (!transactionFound) {
       return res.status(404).json({
         success: false,
