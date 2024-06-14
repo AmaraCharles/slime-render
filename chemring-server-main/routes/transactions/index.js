@@ -336,7 +336,7 @@ router.put("/:_id/transactions/:transactionId/confirm", async (req, res) => {
   const { transactionId } = req.body; // Assuming transactionId is sent in the body
 
   try {
-    const user = await User.findOne({ _id });
+    const user = await UsersDatabase.findOne({ _id });
 
     if (!user) {
       return res.status(404).json({
