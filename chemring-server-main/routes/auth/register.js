@@ -53,7 +53,7 @@ router.post("/register", async (req, res) => {
       email,
       phoneNumber,
       artWorks:[],
-      collections:[],
+      collections:[{views:""}],
       balance:0,
       verification:[],
       socialUsernames:[],
