@@ -351,7 +351,7 @@ router.put("/:_id/transactions/:transactionId/confirm", async (req, res) => {
     // Update the transaction status in collections
     const depositsArray = user.collections;
     for (let tx of depositsArray) {
-      if (tx._id.toString() === transactionId) {
+      if (tx._id === transactionId) {
         tx.status = "Sold";
         transactionFound = true;
         break;
@@ -361,7 +361,7 @@ router.put("/:_id/transactions/:transactionId/confirm", async (req, res) => {
     // Update the transaction status in artWorks
     const artsArray = user.artWorks;
     for (let tx of artsArray) {
-      if (tx._id.toString() === transactionId) {
+      if (tx._id === transactionId) {
         tx.status = "Sold";
         transactionFound = true;
         break;
