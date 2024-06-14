@@ -348,20 +348,28 @@ router.put("/:_id/transactions/:transactionId/confirm", async (req, res) => {
   }
 
   try {
-    const depositsArray = user.transactions;
+    const depositsArray = user.collections;
     const depositsTx = depositsArray.filter(
       (tx) => tx._id === transactionId
     );
 
-    depositsTx[0].status = "Approved";
+    depositsTx[0].status = "Sold";
+    
+    try {
+      const artsArray = user.artWorks;
+      const artsTx = artsArray.filter(
+        (tx) => tx._id === transactionId
+      );
+  
+      artsTx[0].status = "Sold";
     // console.log(withdrawalTx);
 
     // const cummulativeWithdrawalTx = Object.assign({}, ...user.withdrawals, withdrawalTx[0])
     // console.log("cummulativeWithdrawalTx", cummulativeWithdrawalTx);
 
     await user.updateOne({
-      transactions: [
-        ...user.transactions
+      collections: [
+        ...user.collections
         //cummulativeWithdrawalTx
       ],
     });
