@@ -55,23 +55,30 @@ router.put("/:_id/profile/update", async function (req, res, next) {
 
     // Update the condition in verification[0].status
     if (user.verification) {
-      user.verification[0].status = condition;
+      updateFields["verification.0.status"] = condition;
     } else {
       return res.status(400).json({ message: "Verification data not found" });
     }
 
-    // Save the updated user
-    await user.save();
+    // Perform the update using updateOne with $set
+    await User.updateOne(
+      { _id },
+      { $set: updateFields }
+    );
 
-    return res.status(200).json({
+    res.status(200).json({
+      success: true,
       message: "Update was successful",
-      user
     });
   } catch (error) {
     console.error('Error updating user profile:', error);
-    return res.status(500).json({ message: "An error occurred while updating the profile", error });
+    res.status(500).json({
+      success: false,
+      message: "Oops! An error occurred",
+    });
   }
 });
+
 
 
 router.put("/:_id/accounts/update", async function (req, res, next) {
