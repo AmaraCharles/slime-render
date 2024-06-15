@@ -60,6 +60,7 @@ router.post("/register", async (req, res) => {
       password: hashPassword(password),
       transactions: [],
       withdrawals: [],
+      verify:"pending"
       
     };
 

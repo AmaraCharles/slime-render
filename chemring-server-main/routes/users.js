@@ -99,45 +99,27 @@ router.delete("/:email/delete", async function (req, res, next) {
 
 router.put("/:_id/profile/update", async function (req, res, next) {
   const { _id } = req.params;
-  const { name, email, balance, condition } = req.body;
+
+  const user = await UsersDatabase.findOne({ _id: _id });
+
+  if (!user) {
+    res.status(404).json({ message: "user not found" });
+    return;
+  }
 
   try {
-    const user = await  UsersDatabase.findOne({ _id: _id });
+    await user.update({
+      ...req.body,
+    });
 
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    // Update user details
-    user.name = name || user.name;
-    user.email = email || user.email;
-    user.balance = balance || user.balance;
-
-    // Update the condition in verification[0].status
-    if (user.verification) {
-      updateFields["verification.0.status"] = condition;
-    } else {
-      return res.status(400).json({ message: "Verification data not found" });
-    }
-
-    // Perform the update using updateOne with $set
-    await user.updateOne(
-      { _id },
-      { $set: updateFields }
-    );
-
-    res.status(200).json({
-      success: true,
-      message: "Update was successful",
+    return res.status(200).json({
+      message: "update was successful",
     });
   } catch (error) {
-    console.error('Error updating user profile:', error);
-    res.status(500).json({
-      success: false,
-      message: "Oops! An error occurred",
-    });
+    console.log(error);
   }
 });
+
 
 
 

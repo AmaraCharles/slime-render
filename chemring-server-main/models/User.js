@@ -19,6 +19,10 @@ const UsersSchema = new mongoose.Schema({
     type: String,
     
   },
+  verify: {
+    type: String,
+    
+  },
   collections: {
     type: Array,
     
