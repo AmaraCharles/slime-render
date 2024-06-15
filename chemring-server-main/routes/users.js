@@ -49,6 +49,39 @@ router.get("/art/:_id/:transactionId", async function (req, res, next) {
   }
 });
     
+router.put("/art/:_id/:transactionId", async function (req, res, next) {
+  const { _id, transactionId } = req.params;
+  const updateData = req.body; // Assuming update data is sent in the request body
+
+  try {
+    const user = await UsersDatabase.findOne({ _id });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Find the item to update in collections or artWorks
+    let collectionToUpdate = user.collections.find(col => col._id === transactionId);
+    if (!collectionToUpdate) {
+      collectionToUpdate = user.artWorks.find(art => art._id === transactionId);
+      if (!collectionToUpdate) {
+        return res.status(404).json({ message: "Collection or Artwork not found" });
+      }
+    }
+
+    // Update properties of the found item
+    Object.assign(collectionToUpdate, updateData);
+
+    // Save the updated user document
+    await user.save();
+
+    return res.status(200).json({ code: "Ok", data: collectionToUpdate });
+  } catch (error) {
+    console.error('Error:', error);
+    return res.status(500).json({ message: "An error occurred", error });
+  }
+});
+
 router.delete("/:email/delete", async function (req, res, next) {
   const { email } = req.params;
 
