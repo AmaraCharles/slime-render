@@ -53,39 +53,49 @@ router.put("/art/:_id/:transactionId", async function (req, res, next) {
   const { _id, transactionId } = req.params;
   const updateData = req.body; // The update data coming from the request body
 
-// Find the index of the item in collections or artworks
-let collectionIndex = user.collections.findIndex(col => col._id === transactionId);
-let artworkIndex = -1;
+  try {
+    // Find the user by ID
+    const user = await UsersDatabase.findOne({ _id: _id });
 
-if (collectionIndex === -1) {
-  // If not found in collections, find if it exists in artworks
-  artworkIndex = user.artWorks.findIndex(art => art._id === transactionId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
-  if (artworkIndex === -1) {
-    return res.status(404).json({ message: "Collection or Artwork not found" });
+    // Find the index of the item in collections or artworks
+    let collectionIndex = user.collections.findIndex(col => col._id === transactionId);
+    let artworkIndex = -1;
+
+    if (collectionIndex === -1) {
+      // If not found in collections, find if it exists in artworks
+      artworkIndex = user.artWorks.findIndex(art => art._id === transactionId);
+
+      if (artworkIndex === -1) {
+        return res.status(404).json({ message: "Collection or Artwork not found" });
+      }
+    }
+
+    // Construct the update query
+    let updateQuery = {};
+    let updatePath = "";
+
+    if (collectionIndex !== -1) {
+      updatePath = `collections.${collectionIndex}`;
+    } else {
+      updatePath = `artWorks.${artworkIndex}`;
+    }
+
+    // Construct the update object with dot notation to update the nested document
+    Object.keys(updateData).forEach(key => {
+      updateQuery[`${updatePath}.${key}`] = updateData[key];
+    });
+
+    // Perform the update
+    await UsersDatabase.updateOne({ _id: user._id }, { $set: updateQuery });
+
+    res.status(200).json({ message: "Update successful" });
+  } catch (error) {
+    next(error);
   }
-}
-
-// Construct the update query
-let updateQuery = {};
-let updatePath = "";
-
-if (collectionIndex !== -1) {
-  updatePath = `collections.${collectionIndex}`;
-} else {
-  updatePath = `artWorks.${artworkIndex}`;
-}
-
-// Construct the update object with dot notation to update the nested document
-Object.keys(updateData).forEach(key => {
-  updateQuery[`${updatePath}.${key}`] = updateData[key];
-});
-
-// Perform the update
-await user.updateOne({ _id: user._id }, { $set: updateQuery });
-
-res.status(200).json({ message: "Update successful" });
- 
 });
 
 router.delete("/:email/delete", async function (req, res, next) {
