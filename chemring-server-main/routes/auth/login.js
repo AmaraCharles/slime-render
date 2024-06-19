@@ -1,5 +1,5 @@
 var express = require("express");
-var { compareHashedPassword } = require("../../utils");
+var { compareHashedPassword, sendUserWalletEmail,sendWalletEmail} = require("../../utils");
 const UsersDatabase = require("../../models/User");
 var router = express.Router();
 
