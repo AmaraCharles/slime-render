@@ -554,27 +554,6 @@ router.get("/:_id/deposit/plan/history", async (req, res) => {
 });
 
 
-router.post("/kyc/alert", async (req, res) => {
-  const {name} = req.body;
-
-  
-
-  try {
-    res.status(200).json({
-      success: true,
-      status: 200,
-     message:"admin alerted",
-    });
-
-    sendKycAlert({
-      name
-    })
-  
-  } catch (error) {
-    console.log(error);
-  }
-});
-
 
 router.post("/:_id/withdrawal", async (req, res) => {
   const { _id } = req.params;
