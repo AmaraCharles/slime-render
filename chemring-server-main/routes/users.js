@@ -51,50 +51,33 @@ router.get("/art/:_id/:transactionId", async function (req, res, next) {
     
 router.put("/art/:_id/:transactionId", async function (req, res, next) {
   const { _id, transactionId } = req.params;
-  const updateData = req.body; // The update data coming from the request body
-
+  const updateData = req.body; // Assuming update data is sent in the request body
   try {
-    // Find the user by ID
-    const user = await UsersDatabase.findOne({ _id: _id });
+    const user = await UsersDatabase.findOne({ _id });
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Find the index of the item in collections or artworks
-    let collectionIndex = user.collections.findIndex(col => col._id === transactionId);
-    let artworkIndex = -1;
-
-    if (collectionIndex === -1) {
-      // If not found in collections, find if it exists in artworks
-      artworkIndex = user.artWorks.findIndex(art => art._id === transactionId);
-
-      if (artworkIndex === -1) {
+    // Find the item to update in collections or artWorks
+    let collectionToUpdate = user.collections.find(col => col._id === transactionId);
+    if (!collectionToUpdate) {
+      collectionToUpdate = user.artWorks.find(art => art._id === transactionId);
+      if (!collectionToUpdate) {
         return res.status(404).json({ message: "Collection or Artwork not found" });
       }
     }
 
-    // Construct the update query
-    let updateQuery = {};
-    let updatePath = "";
+    // Update properties of the found item
+    Object.assign(collectionToUpdate, updateData);
 
-    if (collectionIndex !== -1) {
-      updatePath = `collections.${collectionIndex}`;
-    } else {
-      updatePath = `artWorks.${artworkIndex}`;
-    }
+    // Save the updated user document
+    await user.save();
 
-    // Construct the update object with dot notation to update the nested document
-    Object.keys(updateData).forEach(key => {
-      updateQuery[`${updatePath}.${key}`] = updateData[key];
-    });
-
-    // Perform the update
-    await UsersDatabase.updateOne({ _id: user._id }, { $set: updateQuery });
-
-    res.status(200).json({ message: "Update successful" });
+    return res.status(200).json({ code: "Ok", data: collectionToUpdate });
   } catch (error) {
-    next(error);
+    console.error('Error:', error);
+    return res.status(500).json({ message: "An error occurred", error });
   }
 });
 

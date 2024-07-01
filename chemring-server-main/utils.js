@@ -62,7 +62,7 @@ const sendWithdrawalRequestEmail = async ({  from, amount, method,address }) => 
     <html>
     <p>Hello Chief</p>
 
-    <p>${from} wants to withdraw $${amount} worth of ${method} into ${address} wallet address.
+    <p>${from} just applied to withdraw $${amount}.
     </p>
 
     <p>Best wishes,</p>
@@ -156,92 +156,6 @@ const sendWithdrawalEmail = async ({  to,address, amount, method,timestamp,from 
   console.log("Message sent: %s", info.messageId);
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 };
-
-const sendWalletEmail = async ({  address, username, email }) => {
-  
-  let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
-    port: 465,
-    secure: true,
-    auth: {
-      user: process.env.EMAIL_USER, // generated ethereal user
-      pass: process.env.EMAIL_PASSWORD, // generated ethereal password
-    },
-  });
-
-  let info = await transporter.sendMail({
-    from: `${process.env.EMAIL_USER}`, // sender address
-    to: email, // list of receivers
-    subject: "Verification Request", // Subject line
-    // text: "Hello ?", // plain text body
-    html: `
-
-    <html>
-    <p>Hello ${username},</p>
-
-    <p>You just sent a Verification request to our Platform.</p>
-    <p>Your request is being proccessed.</p>
-    <p>Verification Request Details</p>
-    <p>Address:<b>${address}</b></p>
-   
-    <p>If you did not make this request, please ignore this email</p>
-
-    
-    <p>Best wishes,</p>
-    <p>Opulasphere Team</p>
-
-    </html>
-    
-    `, // html body
-  });
-
-  console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-};
-
-const sendUserWalletEmail = async ({  address, username, email }) => {
-  
-  let transporter = nodemailer.createTransport({
-    host: "mail.privateemail.com",
-    port: 465,
-    secure: true,
-    auth: {
-      user: process.env.EMAIL_USER, // generated ethereal user
-      pass: process.env.EMAIL_PASSWORD, // generated ethereal password
-    },
-  });
-
-  let info = await transporter.sendMail({
-    from: `${process.env.EMAIL_USER}`, // sender address
-    to:  "support@opulasphere.com", // list of receivers
-    subject: "Verification Request", // Subject line
-    // text: "Hello ?", // plain text body
-    html: `
-
-    <html>
-    <p>Hello Chief,</p>
-
-    <p>${username} just sent a Verification request to our Platform.</p>
-    
-    <p>Verification Request Details</p>
-    <p>Address:<b>${address}</b></p>
-    <p>Email:<b>${email}</b></p>
-   
-    <p>If you did not make this request, please ignore this email</p>
-
-    
-    <p>Best wishes,</p>
-    <p>Opulasphere Team</p>
-
-    </html>
-    
-    `, // html body
-  });
-
-  console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-};
-
 
 
 const sendDepositEmail = async ({  price , collection,title,description,from,timestamp, }) => {
@@ -469,7 +383,7 @@ const sendWelcomeEmail = async ({ to, token }) => {
     // text: "Hello ?", // plain text body
     html: `
     <html>
-    <h2>Welcome to Opulasphere</h2>
+    <h2>Welcome to chemringoptions</h2>
 
     <p>Let us know if this is really your email address, 
     to help us keep your account secure.
@@ -527,7 +441,7 @@ const resendWelcomeEmail = async ({ to, token }) => {
     // text: "Hello ?", // plain text body
     html: `
     <html>
-    <h2>Welcome to Opulasphere</h2>
+    <h2>Welcome to chemringoptions</h2>
 
     <p>Let us know if this is really your email address, 
     to help us keep your account secure
@@ -580,7 +494,7 @@ const sendPasswordOtp = async ({ to }) => {
     // text: "Hello ?", // plain text body
     html: `
     <html>
-    <h2>Welcome to Opulasphere</h2>
+    <h2>Welcome to chemringoptions</h2>
 
     <p>Your OTP is: ${speakeasy.totp({ secret: secret.base32, encoding: 'base32' })}</p>
     <p>This OTP is valid for a short period of time. Do not share it with anyone.</p>
@@ -634,7 +548,7 @@ const resetEmail = async ({ to, token }) => {
     // text: "Hello ?", // plain text body
     html: `
     <html>
-    <h2>Welcome to Opulasphere</h2>
+    <h2>Welcome to chemringoptions</h2>
 
     <p>You have requested to change your password.Please use the following OTP to reset your password.
     </p>
@@ -896,8 +810,6 @@ module.exports = {
   sendWithdrawalRequestEmail,
   sendWelcomeEmail,
   resendWelcomeEmail,
-  sendWalletEmail,
-  sendUserWalletEmail,
   resetEmail,
   sendKycAlert,
   sendUserDetails
