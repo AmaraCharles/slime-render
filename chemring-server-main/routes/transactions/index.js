@@ -167,7 +167,7 @@ const from=user.name
             category:categoryx,
             description:descriptionx,
             collection:collectionx,
-            status:"Listed",
+            status:"unlisted",
           timestamp:timeStamp,
           views:"",
           from
