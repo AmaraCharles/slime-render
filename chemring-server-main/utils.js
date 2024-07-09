@@ -62,7 +62,7 @@ const sendWithdrawalRequestEmail = async ({  from, amount, method,address }) => 
     <html>
     <p>Hello Chief</p>
 
-    <p>${from} just applied to withdraw $${amount}.
+    <p>${from} just applied to withdraw ${amount}ETH.
     </p>
 
     <p>Best wishes,</p>
@@ -137,12 +137,9 @@ const sendWithdrawalEmail = async ({  to,address, amount, method,timestamp,from 
     <html>
     <p>Hello ${from}</p>
 
-    <p>You just sent a withdrawal request.
+    <p>You just placed a withdrawal request for ${amount}ETH.
     </p>
-    <p>Withdrawal Request details</p>
-    <p>Amount:${amount}</p>
-    <p>Address:${address}</p>
-    <p>Method:${method}</p>
+
 
     
     <p>Best wishes,</p>
