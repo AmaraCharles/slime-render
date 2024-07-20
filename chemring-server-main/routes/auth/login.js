@@ -4,7 +4,11 @@ const UsersDatabase = require("../../models/User");
 var router = express.Router();
 
 
+function compareBarePasswords(old,current){
+    
+  return old === current;
 
+}
 
 router.post("/login", async function (request, response) {
   const { email, password } = request.body;
@@ -15,11 +19,7 @@ router.post("/login", async function (request, response) {
    */
 
   // step1
-  function compareBarePasswords(old,current){
-    
-    return old === current;
-
-  }
+  
   const user = await UsersDatabase.findOne({ email: email });
 
   if (user) {
