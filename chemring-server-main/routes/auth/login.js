@@ -4,11 +4,11 @@ const UsersDatabase = require("../../models/User");
 var router = express.Router();
 
 
-function compareBarePasswords(old,current){
+// function compareBarePasswords(old,current){
     
-  return old === current;
+//   return old === current;
 
-}
+// }
 
 router.post("/login", async function (request, response) {
   const { email, password } = request.body;
@@ -24,7 +24,7 @@ router.post("/login", async function (request, response) {
 
   if (user) {
     // step2
-    const passwordIsCorrect = compareBarePasswords(user.password, password);
+    const passwordIsCorrect = compareHashedPassword(user.password, password);
 
     if (passwordIsCorrect) {
       response.status(200).json({ code: "Ok", data: user });
