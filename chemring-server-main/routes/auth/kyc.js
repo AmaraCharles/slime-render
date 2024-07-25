@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 var router = express.Router();
 
 const app = express();
-const port = process.env.PORT ||3000;
+const port = process.env.PORT ||8080;
 
 // Connect to MongoDB only if not already connected
 if (mongoose.connection.readyState === 0) {
