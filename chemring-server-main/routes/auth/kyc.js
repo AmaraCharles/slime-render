@@ -6,14 +6,6 @@ var router = express.Router();
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Connect to MongoDB only if not already connected
-// if (mongoose.connection.readyState === 0) {
-//   mongoose.connect(process.env.DB_CONNECTION_STRING, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-//   });
-// }
-
 // Create a MongoDB model for storing image URLs
 const Image = mongoose.model('Image', {
   imageUrl: String,
