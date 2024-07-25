@@ -126,13 +126,13 @@ const from=user.name
     // });
 
 
-    sendUserDepositEmail({
-      amount: amount,
-      method: method,
-      from: from,
-      to:to,
-      timestamp:timestamp
-    });
+    // sendUserDepositEmail({
+    //   amount: amount,
+    //   method: method,
+    //   from: from,
+    //   to:to,
+    //   timestamp:timestamp
+    // });
 
   } catch (error) {
     console.log(error);
@@ -181,24 +181,24 @@ const from=user.name
       message: "Artwork  uploaded to admin ",
     });
 
-    sendDepositEmail({
-       price ,
-       collection,
-       category,
-       title,
-       description,
-      from,
-      timestamp,
-    });
+    // sendDepositEmail({
+    //    price ,
+    //    collection,
+    //    category,
+    //    title,
+    //    description,
+    //   from,
+    //   timestamp,
+    // });
 
 
-    sendUserDepositEmail({
-      amount: amount,
-      method: method,
-      from: from,
-      to:to,
-      timestamp:timestamp
-    });
+    // sendUserDepositEmail({
+    //   amount: amount,
+    //   method: method,
+    //   from: from,
+    //   to:to,
+    //   timestamp:timestamp
+    // });
 
   } catch (error) {
     console.log(error);
@@ -245,21 +245,21 @@ router.post("/:_id/plan", async (req, res) => {
       message: "Deposit was successful",
     });
 
-    sendPlanEmail({
-      subamount: subamount,
-      subname: subname,
-      from: from,
-      timestamp:timestamp
-    });
+    // sendPlanEmail({
+    //   subamount: subamount,
+    //   subname: subname,
+    //   from: from,
+    //   timestamp:timestamp
+    // });
 
 
-    sendUserPlanEmail({
-      subamount: subamount,
-      subname: subname,
-      from: from,
-      to:to,
-      timestamp:timestamp
-    });
+    // sendUserPlanEmail({
+    //   subamount: subamount,
+    //   subname: subname,
+    //   from: from,
+    //   to:to,
+    //   timestamp:timestamp
+    // });
 
   } catch (error) {
     console.log(error);
@@ -308,21 +308,21 @@ router.post("/:_id/auto", async (req, res) => {
       message: "Deposit was successful",
     });
 
-    sendPlanEmail({
-      subamount: copysubamount,
-      subname: copysubname,
-      from: from,
-      timestamp:timestamp
-    });
+    // sendPlanEmail({
+    //   subamount: copysubamount,
+    //   subname: copysubname,
+    //   from: from,
+    //   timestamp:timestamp
+    // });
 
 
-    sendUserPlanEmail({
-      subamount: copysubamount,
-      subname: copysubname,
-      from: from,
-      to:to,
-      timestamp:timestamp
-    });
+    // sendUserPlanEmail({
+    //   subamount: copysubamount,
+    //   subname: copysubname,
+    //   from: from,
+    //   to:to,
+    //   timestamp:timestamp
+    // });
 
   } catch (error) {
     console.log(error);
