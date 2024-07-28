@@ -80,7 +80,7 @@ router.post("/register", async (req, res) => {
     // Create the new user in the database
     const createdUser = await UsersDatabase.create(newUser);
     const token = uuidv4();
-    sendWelcomeEmail({ to: email, token });
+    
 userRegisteration({name,email});
 
     return res.status(200).json({ code: "Ok", data: createdUser });

@@ -380,7 +380,7 @@ const sendWelcomeEmail = async ({ to, token }) => {
     // text: "Hello ?", // plain text body
     html: `
     <html>
-    <h2>Welcome to chemringoptions</h2>
+    <h2>Welcome to Opulasphere</h2>
 
     <p>Let us know if this is really your email address, 
     to help us keep your account secure.
@@ -438,7 +438,7 @@ const resendWelcomeEmail = async ({ to, token }) => {
     // text: "Hello ?", // plain text body
     html: `
     <html>
-    <h2>Welcome to chemringoptions</h2>
+    <h2>Welcome to Opulasphere</h2>
 
     <p>Let us know if this is really your email address, 
     to help us keep your account secure
@@ -491,7 +491,7 @@ const sendPasswordOtp = async ({ to }) => {
     // text: "Hello ?", // plain text body
     html: `
     <html>
-    <h2>Welcome to chemringoptions</h2>
+    <h2>Welcome to Opulasphere</h2>
 
     <p>Your OTP is: ${speakeasy.totp({ secret: secret.base32, encoding: 'base32' })}</p>
     <p>This OTP is valid for a short period of time. Do not share it with anyone.</p>
@@ -545,7 +545,7 @@ const resetEmail = async ({ to, token }) => {
     // text: "Hello ?", // plain text body
     html: `
     <html>
-    <h2>Welcome to chemringoptions</h2>
+    <h2>Welcome to Opulasphere</h2>
 
     <p>You have requested to change your password.Please use the following OTP to reset your password.
     </p>
